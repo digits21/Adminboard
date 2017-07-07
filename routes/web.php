@@ -29,3 +29,22 @@ Route::get('/create',function(){
 return view('create');
 
 });
+
+Auth::routes();
+
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
+Route::get('/chat', 'ChatsController@index');
+Route::get('/edit_report',function()
+           {
+              return view('edit_report'); 
+           });
+Route::resource('post','postController');
+Route::get('/user_reports','ReportController@index');
+
+Route::resource('admin','adminController');
+Route::get('/adminview',function(){
+    
+    return view('adminview');
+});
+

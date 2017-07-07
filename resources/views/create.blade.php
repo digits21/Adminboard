@@ -4,7 +4,11 @@
 	<div class="col-sm-offset-4 col-sm-4">
 		<br>
 		<div class="panel panel-primary">	
-			<div class="panel-heading">Create new user</div>
+			<div class="panel-heading">Create new user
+            @if ($errors->any())
+                <h4 class="alert alert-danger">{{$errors->first()}}</h4>
+                @endif
+            </div>
 			<div class="panel-body"> 
 				<div class="col-sm-12">
 					{!! Form::open(['route' => 'user.store', 'class' => 'form-horizontal panel']) !!}	

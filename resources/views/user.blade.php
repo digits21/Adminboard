@@ -18,7 +18,7 @@
 						<th></th>
 						<th></th>
 						<th></th>
-                                                <th>Contact</th>
+                                                <th>Reports</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,7 +33,10 @@
 									{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Do you really want to delete this user ?\')']) !!}
 								{!! Form::close() !!}
 							</td>
-                                                       <td> <a href="mailto:{{$user->email}}" class="btn btn-primary btn-block" role="button">Send Email </a>  </td>
+                            <td> 
+                            {!!link_to_route('admin.show', 'See Reports',[$user->id],['class'=>'btn btn-primary'])!!}
+                            
+                            </td>
 						</tr>
 					@endforeach
 	  			</tbody>

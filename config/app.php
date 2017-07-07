@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Sanlien Chat Room'),
 
     /*
     |--------------------------------------------------------------------------
@@ -105,7 +105,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-128-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,10 +173,12 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
        Collective\Html\HtmlServiceProvider::class,
+        Vinkla\Pusher\PusherServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
     ],
 
     /*
@@ -227,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form'=> Collective\Html\FormFacade::class,
          'Html' => Collective\Html\HtmlFacade::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ],
 
 ];

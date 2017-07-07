@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Validator;
+use Illuminate\Support\Facades\Auth;
+
 class userController extends Controller
 {
     /**
@@ -13,11 +16,23 @@ class userController extends Controller
      */
     public function index()
     {
+        
+        if(Auth::guest())
+        {
+            return redirect('login');
+        }
+        else
+        {
+            if(Auth::user()->admin==1)
+          {
+             $users=User::orderBy('id','asc')->paginate(10);
+             $links=$users->links();
 
-     $users=User::orderBy('id','asc')->paginate(10);
-    $links=$users->links();
-
-return view('user',compact('users','links'));   
+              return view('user',compact('users','links'));
+          }
+             return view('chat');
+        }
+      
         //
     }
 
@@ -41,6 +56,18 @@ return view('user',compact('users','links'));
      */
     public function store(Request $request)
     {
+        $validator=Validator::make($request->all(),
+                                 
+                                 ['name'=>'required|string|max:60',
+                                  'email'=>'required|email|max:255']
+                                  
+                                 
+                                 );
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors(['error','user could not be created verify your credentials']);
+        }
+        
    $user=new User();
 $user->name=$request->input('name');
 
