@@ -10,7 +10,7 @@
      <div class="alert alert-danger">{!!$errors->first()!!}</div>
 @endif
 </div>
-<div class="alert alert-warning col-sm-offset-3 col-sm-6 text-center"> You can't upload files for now </div>
+<div class="alert alert-success col-sm-offset-3 col-sm-6 text-center"> You can upload files as well  </div>
 <div class="col-sm-offset-3 col-sm-6">
     {{Form::open(['route' => 'post.store'])}}
 <div class="box-body">

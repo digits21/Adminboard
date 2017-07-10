@@ -16,7 +16,7 @@ class Reports extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('description');
+            $table->longtext('description');
             $table->string('image')->nullable();
             $table->string('user_id');
             $table->rememberToken();

@@ -15,20 +15,11 @@ Route::get('/','userController@index');
 
 Route::resource('user','userController');
 
-Route::get('/show',function(){
+Route::get('/show','ViewController@show');
 
-return view('show');
-});
+Route::get('/edit','ViewController@edit');
 
-Route::get('/edit', function (){
-
-return view('edit');
-});
-
-Route::get('/create',function(){
-return view('create');
-
-});
+Route::get('/create','ViewController@create');
 
 Auth::routes();
 

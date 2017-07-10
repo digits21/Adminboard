@@ -11,7 +11,8 @@
         "laravelcollective/html": "5.4.*",
         "mews/purifier": "^2.0",
         "pusher/pusher-php-server": "^2.6",
-        "vinkla/pusher": "^2.5"
+        "vinkla/pusher": "^2.5",
+       "intervention/image": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

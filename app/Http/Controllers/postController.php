@@ -7,6 +7,7 @@ use Validator;
 use App\Reports;
 use Purifier;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 class postController extends Controller
 {
     /**
@@ -44,7 +45,7 @@ class postController extends Controller
                                   
                                   [
                                       'title'=>'required|string|max:255',
-                                      'body'=>'required|string|',
+                                      'body'=>'required|',
                                        
                                       
                                       
@@ -59,26 +60,50 @@ class postController extends Controller
         
         $reports->title=$request->input('title');
         
-        $description=Purifier::clean($request->input('body'));
-        $reports->description=$description;
         
-        /*if($request->has('files'))
+        
+        $description=$request->input('body');
+        
+        $dom=new \DOMDocument();
+        
+        $dom->loadHtml( mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $images=$dom->getElementsByTagName('img');
+        
+        foreach($images as $img)
         {
+            $src=$img->getAttribute('src');
             
-            //var_dump($request->all());
-            echo $image;
+            if(preg_match('/data:image/',$src))
+            {
+                
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+				$mimetype = $groups['mime'];
+				
+				// Generating a random filename
+				$filename = uniqid();
+				$filepath = "/images/$filename.$mimetype";
+                $image=Image::make($src)->encode($mimetype,100)->save(public_path($filepath));
+                
+                $new_src=asset($filepath);
+                $img->removeAttribute('src');
+                
+                $img->setAttribute('src',$new_src);
+                
+                
+                
+                
+                
+                
+                
+            }
             
-            /*$way=public_path('images');
-            $imageName=$image->getClientOriginalName();
-            
-            $image->move($way,$imageName);
-            
-            $reports->image=$imageName;
-            
-            
-            
-            
-        }*/
+        }
+        
+        
+        $reports->description=$dom->saveHtml();
+        
+        
         $reports->user_id=Auth::user()->id;
         $reports->save();
         
@@ -131,7 +156,7 @@ class postController extends Controller
             
             
             'title'=>'required|string',
-            'body'=>'required|string',
+            'body'=>'required',
         ]);
         if($validator->fails())
         {
@@ -140,7 +165,46 @@ class postController extends Controller
         }
         $id=Auth::user()->id;
         $report->title=$request->input('title');
-        $report->description=$request->input('body');
+        $description=$request->input('body');
+        
+        $dom=new \DOMDocument();
+        
+        $dom->loadHtml( mb_convert_encoding($description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $images=$dom->getElementsByTagName('img');
+        
+        foreach($images as $img)
+        {
+            $src=$img->getAttribute('src');
+            
+            if(preg_match('/data:image/',$src))
+            {
+                
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+				$mimetype = $groups['mime'];
+				
+				// Generating a random filename
+				$filename = uniqid();
+				$filepath = "/images/$filename.$mimetype";
+                $image=Image::make($src)->encode($mimetype,100)->save(public_path($filepath));
+                
+                $new_src=asset($filepath);
+                $img->removeAttribute('src');
+                
+                $img->setAttribute('src',$new_src);
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+        }
+        
+          //echo $report->description;
+        $report->description=$dom->saveHtml();
         $report->user_id=$id;
         $report->save();
         

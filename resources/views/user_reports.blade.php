@@ -28,7 +28,7 @@
 				<tbody>
 					@foreach ($reports as $report)
 						<tr>
-							<td>{!! $report->id !!}</td>
+							<td>{!! $report->created_at !!}</td>
 							<td class="text-primary"><strong>{!! $report->title !!}</strong></td>
 							<td>{!! link_to_route('post.show', 'See report', [$report->id], ['class' => 'btn btn-success btn-block']) !!}</td>
 							<td>{!! link_to_route('post.edit', 'Edit', [$report->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
