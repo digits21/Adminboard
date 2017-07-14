@@ -23,15 +23,10 @@ class userController extends Controller
         }
         else
         {
-            if(Auth::user()->admin==1)
-          {
-             $users=User::orderBy('id','asc')->paginate(10);
-             $links=$users->links();
-
-              return view('user',compact('users','links'));
-          }
-             return view('chat');
+            return redirect()->action('ViewController@dashboard');
         }
+             
+        
       
         //
     }

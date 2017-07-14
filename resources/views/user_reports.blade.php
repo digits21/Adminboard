@@ -1,10 +1,10 @@
-@extends('user-template')
+@extends('single-post-template')
 
-@section('contenu')
+@section('content')
 
 
-<br>
-    <div class="col-sm-offset-3 col-sm-6">
+<br><br><br><br>
+    <div class="col-sm-offset-2 col-sm-8">
     	@if(session()->has('ok'))
 			<div class="alert alert-success alert-dismissible">{!! session('ok') !!}</div>
 		@endif

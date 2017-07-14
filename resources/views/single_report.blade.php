@@ -1,7 +1,7 @@
-@extends('user-template')
+@extends('single-content')
 
-@section('contenu')
-    <div class="col-sm-offset-2 col-sm-8">
+@section('content')
+    <div class="col-sm-12">
     	<br>
 		<div class="panel panel-primary">	
 			<div class="panel-heading text-center">{{$report->title}}</div>

@@ -9,7 +9,7 @@
     	
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Reports of {{$user->name}}</h3>
+				<h3 class="panel-title">Reports of {{Auth::user()->name}}</h3>
 			</div>
             
 			<table class="table">
@@ -41,8 +41,47 @@
 	  			</tbody>
 			</table>
 		</div>
-		
+		{!! link_to_route('post.create', 'Add a  report', [], ['class' => 'btn btn-info pull-right']) !!}
 		{!! $self_reports_pages !!}
+<!-- Participating Project -->
+<br><br><br>
+    
+    	
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Projects Which {{Auth::user()->name}} Contributes</h3>
+			</div>
+            
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Project Code</th>
+						<th></th>
+						<th></th>
+						
+                                                
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ($participates_projects as $project)
+						<tr>
+							<td>{!! $project->created_at !!}</td>
+							<td class="text-primary"><strong>{!! $project->code !!}</strong></td>
+							<td>{!! link_to_route('participate.show', 'See Project', [$project->id], ['class' => 'btn btn-success btn-block']) !!}</td>
+							<td>{!! link_to_route('projects.edit', 'Edit', [$project->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
+							
+                            
+						</tr>
+					@endforeach
+	  			</tbody>
+			</table>
+		</div>
+		
+		{!! $participate_links !!}
+
+<!-- Participating projects end -->
+
 
 @endsection
 
@@ -53,7 +92,7 @@
     	
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Active Projects of {{$user->name}}</h3>
+				<h3 class="panel-title">Active Projects of {{Auth::user()->name}}</h3>
 			</div>
             
 			<table class="table">
@@ -75,9 +114,7 @@
 							<td>{!! link_to_route('projects.show', 'See Project', [$project->id], ['class' => 'btn btn-success btn-block']) !!}</td>
 							<td>{!! link_to_route('projects.edit', 'Edit', [$project->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
 							<td>
-								{!! Form::open(['method' => 'DELETE', 'route' => ['projects.destroy', $project->id]]) !!}
-									{!! Form::submit('Close', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Do you really want to close this project ?\')']) !!}
-								{!! Form::close() !!}
+								
 							</td>
                             
 						</tr>
@@ -85,60 +122,21 @@
 	  			</tbody>
 			</table>
 		</div>
-		
+		{!! link_to_route('projects.create', 'Add a  project', [], ['class' => 'btn btn-info pull-right']) !!}
 		{!! $self_projects_pages!!}
 
 <!--Closed projects-->
-
-<br><br><br><br>
-    
-    	
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Closed Projects of {{$user->name}}</h3>
-			</div>
-            
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Project Code</th>
-						<th></th>
-						<th></th>
-						<th></th>
-                                                
-					</tr>
-				</thead>
-				<tbody>
-					@foreach ($Closed_projects as $project)
-						<tr>
-							<td>{!! $project->created_at !!}</td>
-							<td class="text-primary"><strong>{!! $project->code !!}</strong></td>
-							<td>{!! link_to_route('projects.show', 'See Project', [$project->id], ['class' => 'btn btn-success btn-block']) !!}</td>
-							<td>{!! link_to_route('projects.edit', 'Edit', [$project->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
-							<td>
-								<a href="#" class="btn btn-danger" role="button" disabled> Closed</a>
-							</td>
-                            
-						</tr>
-					@endforeach
-	  			</tbody>
-			</table>
-		</div>
-		
-		{!! $projects_pages !!}
-
 
 <!-- Closed projects end -->
 
 <!-- Managing projects -->
 
-<br><br><br><br>
+<br><br><br>
     
     	
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Managing Projects of {{$user->name}}</h3>
+				<h3 class="panel-title"> Projects Which {{Auth::user()->name}} Manages</h3>
 			</div>
             
 			<table class="table">
@@ -160,9 +158,7 @@
 							<td>{!! link_to_route('projects.show', 'See Project', [$project->id], ['class' => 'btn btn-success btn-block']) !!}</td>
 							<td>{!! link_to_route('projects.edit', 'Edit', [$project->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
 							<td>
-								{!! Form::open(['method' => 'DELETE', 'route' => ['projects.destroy', $project->id]]) !!}
-									{!! Form::submit('Close', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Do you really want to close this project ?\')']) !!}
-								{!! Form::close() !!}
+								
 							</td>
                             
 						</tr>
@@ -174,6 +170,7 @@
 		{!! $manage_links !!}
 
 <!--Maning Projects End -->
+
 
 
 @endsection

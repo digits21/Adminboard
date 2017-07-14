@@ -12,7 +12,12 @@
 					Administrator
 				@endif
 			</div>
-		</div>				
+            
+            
+            
+		</div>
+        {!! link_to_route('user.edit', 'Edit', [$user->id], ['class' => 'btn btn-warning btn-block pull-right']) !!}
+        <br><br><br>
 		<a href="javascript:history.back()" class="btn btn-primary">
 			<span class="glyphicon glyphicon-circle-arrow-left"></span> Back
 		</a>

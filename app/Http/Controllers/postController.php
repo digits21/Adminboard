@@ -107,7 +107,7 @@ class postController extends Controller
         $reports->user_id=Auth::user()->id;
         $reports->save();
         
-        return redirect()->action('ReportController@index');
+        return redirect()->action('ViewController@dashboard');
         
     }
 
@@ -208,7 +208,7 @@ class postController extends Controller
         $report->user_id=$id;
         $report->save();
         
-        return redirect()->back()->withOk('Report modified succesfully');
+        return redirect()->action('ViewController@dashboard');
         
         //
     }

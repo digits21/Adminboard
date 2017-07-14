@@ -38,4 +38,23 @@ Route::get('/adminview',function(){
     
     return view('adminview');
 });
+Route::get('admin-template',function(){
+    
+    return view('admin-template');
+    
+});
+
+Route::resource('projects','projectsController');
+
+Route::get('/create_project','createProjectController@index');
+
+Route::get('/edit_project',function(){
+    
+    return view('edit_project');
+});
+
+Route::get('/admin_dashboard','ViewController@dashboard');
+Route::get('/user_dashboard','ViewController@dashboard');
+Route::resource('/participate','ParticipantController');
+Route::get('profile','ViewController@profile');
 

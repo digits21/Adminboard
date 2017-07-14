@@ -1,8 +1,8 @@
-@extends('user-template')
+@extends('admin-template')
 
-@section('contenu')
+@section('content-left')
     <br>
-    <div class="col-sm-offset-3 col-sm-6">
+    
     	@if(session()->has('ok'))
 			<div class="alert alert-success alert-dismissible">{!! session('ok') !!}</div>
 		@endif
@@ -18,7 +18,7 @@
 						<th></th>
 						<th></th>
 						<th></th>
-                                                <th>Reports</th>
+                    <th>Reports</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,6 +44,6 @@
 		</div>
 		{!! link_to_route('user.create', 'Add a user', [], ['class' => 'btn btn-info pull-right']) !!}
 		{!! $links !!}
-	</div>
+	
 @endsection
 

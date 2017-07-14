@@ -1,21 +1,24 @@
 <!-- resources/views/chat.blade.php -->
 
-@extends('post-template')
+@extends('single-post-template')
 
 @section('content')
-<div class="col-sm-offset-3 col-sm-6">
+<br><br><br><br><br><br>
+<div class="col-sm-offset-2 col-sm-8">
 @if(session()->has('ok'))
 			<div class="alert alert-success alert-dismissible">{!! session('ok') !!}</div>
 @elseif($errors->any())
      <div class="alert alert-danger">{!!$errors->first()!!}</div>
 @endif
 </div>
-<div class="alert alert-success col-sm-offset-3 col-sm-6 text-center"> You can upload files as well  </div>
-<div class="col-sm-offset-3 col-sm-6">
-    {{Form::open(['route' => 'post.store'])}}
+
+
+<div class="col-sm-offset-2 col-sm-8">
+<div class="alert alert-success text-center"> You can upload files as well  </div>
+{{Form::open(['route' => 'post.store'])}}
 <div class="box-body">
 <div class="form-group">
-{{Form::label('title', 'Title')}}
+
 {{Form::text('title',null,array('class' => 'form-control', 'placeholder'=>'Title'))}}
 </div>
 <div class="form-group">
@@ -23,8 +26,11 @@
 {{Form::textarea('body',null,array('class' => 'form-control', 'placeholder'=>'Content', 'id' => 'summernote'))}}
 </div>
 <div class="form-group">
-     {{Form::submit('Publish Post',array('class' => 'btn btn-primary btn-sm'))}} </div>
+     {{Form::submit('Publish Post',array('class' => 'btn btn-primary btn-sm pull-right'))}} </div>
 {{Form::close()}}
 </div>
+    <a href="javascript:history.back()" class="btn btn-primary">
+			<span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+		</a>
 </div>
 @endsection
